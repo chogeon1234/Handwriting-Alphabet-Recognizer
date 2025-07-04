@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.stream.IntStream;
 
 /**
  *
@@ -324,12 +325,12 @@ public class WordDrawingProcessor {
     }
 
     public static float getScore(byte[][] basis, byte[][] sample, int rate) {
-        float score4 = getScore2(basis, sample, 10 * rate, true);
-        float score5 = getScore3(basis, sample, 10 * rate, true);
+        float score4 = getScore2(basis, sample, 5 * rate, true);
+        float score5 = getScore3(basis, sample, 5 * rate, true);
 //        if (score4 > 0.7 && score5 > 0.7) {
-        float score2 = getScore2(basis, sample, 30 * rate, false);
-        float score3 = getScore3(basis, sample, 30 * rate, false);
-        float score1 = getScore4(basis, sample, 15 * rate);
+        float score2 = getScore2(basis, sample, 5 * rate, false);
+        float score3 = getScore3(basis, sample, 5 * rate, false);
+        float score1 = getScore4(basis, sample, 5 * rate);
         return (score2 + score3 + score1*3 + score4 + score5) * 100 / 7;
 //        }
 //        return 0;
@@ -703,27 +704,27 @@ public class WordDrawingProcessor {
 //        } catch (Exception e) {
 //
 //        }
-        float score, maxScore = 0;
+        float score=0, maxScore = 0;
         char ch = ' ';
         for (int a = 0; a < alphabetDrawing.length; a++) {
 
-            score = getScore(alphabetDrawing[a], smallDrawing, 10);
+            score = getScore(alphabetDrawing[a], smallDrawing, 3);
             if (maxScore <= score) {
                 maxScore = score;
                 ch = (char) ('a' + a);
             }
         }
-        for (int a = 0; a < numberDrawing.length; a++) {
-
-            score = getScore(numberDrawing[a], smallDrawing, 10);
-            if (maxScore <= score) {
-                maxScore = score;
-                ch = (char) ('0' + a);
-            }
-        }
+//        for (int a = 0; a < numberDrawing.length; a++) {
+//
+//            score = getScore(numberDrawing[a], smallDrawing, 5);
+//            if (maxScore <= score) {
+//                maxScore = score;
+//                ch = (char) ('0' + a);
+//            }
+//        }
 //        for (int a = 0; a < bigAlphabetDrawing.length; a++) {
 //
-//            score = getScore(bigAlphabetDrawing[a], smallDrawing, 10);
+//            score = getScore(bigAlphabetDrawing[a], smallDrawing, 5);
 //            if (maxScore <= score) {
 //                maxScore = score;
 //                ch = (char) ('A' + a);

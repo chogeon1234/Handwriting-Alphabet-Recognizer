@@ -4,8 +4,10 @@
  */
 package Frames;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -188,9 +190,13 @@ public class ImageToAlphabetFrame extends javax.swing.JFrame {
         public void mouseDragged(MouseEvent e) {
             Graphics g = image.getGraphics();
             g.setColor(Color.BLACK);
-            g.fillOval(e.getX() - 10, e.getY() - 10, 20, 20);
+            ((Graphics2D)g).setStroke(new BasicStroke(10));
+            g.drawLine(e.getX(), e.getY(), befX, befY);
+            befX=e.getX();
+            befY=e.getY();
             repaint();
         }
+        int befX, befY;
 
         @Override
         public void mouseMoved(MouseEvent e) {
@@ -205,8 +211,10 @@ public class ImageToAlphabetFrame extends javax.swing.JFrame {
         public void mousePressed(MouseEvent e) {
 
             Graphics g = image.getGraphics();
-            g.setColor(Color.BLACK);
-            g.fillOval(e.getX() - 10, e.getY() - 10, 20, 20);
+//            g.setColor(Color.BLACK);
+//            g.fillOval(e.getX() - 7, e.getY() - 7, 14, 14);
+            befX=e.getX();
+            befY=e.getY();
             repaint();
         }
 
